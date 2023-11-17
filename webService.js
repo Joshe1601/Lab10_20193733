@@ -2,9 +2,13 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2");
+var cors = require('cors');
+
 
 const app = express();
 const port = 3000;
+
+app.use(cors());
 
 let connection = mysql.createConnection({
     host: "localhost",
@@ -22,6 +26,7 @@ connection.connect(function (err) {
 app.listen(port, () => {
     console.log(`Servidor Express en funcionamiento en el puerto ${port}`);
 });
+
 
 app.get("/trabajadores",function (req, res){
     connection.query("SELECT * FROM trabajadores", function (err, result, fields) {

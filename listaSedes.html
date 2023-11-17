@@ -2,9 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Bicicentro GTICS</title>
+  <link href="bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container-sm">
+  <img src="logo.jpeg" class="img-fluid" alt="">
+  <h2>Bicicentro GTICS</h2>
+  <div class="container d-flex">
+    <a class="btn btn-primary me-3" href="index.html">Regresar</a>
+  </div>
+</div>
+<h3>Lista de Sedes</h3>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Nombre</th>
+    <th scope="col">Direccion</th>
+    <th scope="col">Acciones</th>
+  </tr>
+  </thead>
+  <tbody id="bodySede">
+  <tr>
 
+    <td>
+      <a class="btn btn-warning" href="detalleSede.html">Ver detalles</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        url: "http://localhost:3000/sedes/",
+    }).done(function (data) {
+        let html = "";
+        for (let i = 0; i < data.length; i++) {
+            html += "<tr>";
+            html += "<td>" + (i+1) + "</td>";
+            html += "<td>" + data[i].nombreSede + "</td>";
+            html += "<td>" + data[i].direccion + "</td>";
+            html += "<td>";
+            html += "<a class='btn btn-warning' href='detalleSede.html?url='"+ encodeURIComponent(data[i].id) + ">Ver detalles</a>";
+            html += "</td>";
+            html += "</tr>";
+        }
+        $("#bodySedes").html(html);
+    });
+</script>
 </body>
 </html>
