@@ -19,6 +19,9 @@ connection.connect(function (err) {
     console.log("Conexion exitosa!");
 });
 
+app.listen(port, () => {
+    console.log(`Servidor Express en funcionamiento en el puerto ${port}`);
+});
 
 app.get("/trabajadores",function (req, res){
     connection.query("SELECT * FROM trabajadores", function (err, result, fields) {
