@@ -1,0 +1,23 @@
+{
+  "name": "lab10_20193733",
+  "version": "1.0.0",
+  "description": "Ultimo laboratorio de GTICS",
+  "main": "webService.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joshe1601/Lab10_20193733.git"
+  },
+  "author": "Jose Morillos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joshe1601/Lab10_20193733/issues"
+  },
+  "homepage": "https://github.com/Joshe1601/Lab10_20193733#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.3"
+  }
+}
