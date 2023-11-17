@@ -62,7 +62,7 @@
     <th scope="col">Fecha</th>
   </tr>
   </thead>
-  <tbody id="bodyTrabajadores">
+  <tbody id="bodyVenta">
   <tr>
   </tr>
   </tbody>
@@ -71,24 +71,42 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const dniTrabajador = decodeURIComponent(urlParams.get('url'));
+
     $.ajax({
         method: "GET",
         dataType: "json",
-        url: "http://localhost:3000/trabajadores/",
+        url: "http://localhost:3000/trabajadores/"+dniTrabajador,
+    }).done(function (data) {
+        let html = "";
+        for (let i = 0; i < data.length; i++) {
+            $("#idTrabajador").html(data[i].dni);
+            $("#nombreTrabajador").html(data[i].nombres + " " + data[i].apellidos);
+            $("#correoTrabajador").html(data[i].correo);
+            $("#sedeTrabajador").html(data[i].nombreSede);
+
+        }
+    });
+
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        url: "http://localhost:3000/trabajadores/ventas/"+dniTrabajador,
     }).done(function (data) {
         let html = "";
         for (let i = 0; i < data.length; i++) {
             html += "<tr>";
             html += "<td>" + (i+1) + "</td>";
-            html += "<td>" + data[i].nombres + " " +data[i].apellidos + "</td>";
-            html += "<td>" + data[i].correo + "</td>";
-            html += "<td>";
-            html += "<a class='btn btn-warning' href='detalleTrabajador.html?url='"+ encodeURIComponent(data[i].id) + ">Ver detalles</a>";
-            html += "</td>";
+            html += "<td>" + data[i].nombre + "</td>";
+            html += "<td>" + data[i].numeroserie + "</td>";
+            html += "<td>" + data[i].marca + "</td>";
+            html += "<td>" + data[i].fecha + "</td>";
             html += "</tr>";
         }
-        $("#bodyTrabajadores").html(html);
-    });
+        $("#bodyVenta").html(html);
+    })
 </script>
 </body>
 </html>
